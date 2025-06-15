@@ -24,7 +24,7 @@ export class GeminiService {
       // Truncate the diff if it's too long (Gemini has token limits)
       const truncatedDiff = prDiff.length > 30000 ? prDiff.substring(0, 30000) + '\n[Diff was truncated due to length]' : prDiff;
       
-      const model = this.genAI.getGenerativeModel({ model: 'gemini-1.5-pro' });
+      const model = this.genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
       
       const prompt = `Analyze the following GitHub PR diff and provide:
 1. A 100-word summary of the changes

@@ -1,0 +1,56 @@
+@baseUrl = http://localhost:3000
+@contentType = application/json
+
+### 1. Get PR Summary
+# This endpoint analyzes a GitHub PR and returns a summary and risk assessment
+# Replace `owner/repo` with a real GitHub repository and `123` with a valid PR number
+POST {{baseUrl}}/pr-summary HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+  "repo": "owner/repo",
+  "pr_number": 123
+}
+
+### 2. Example with a real repository (NestJS)
+# This is an example using the NestJS repository
+# You can replace with any public repository you have access to
+POST {{baseUrl}}/pr-summary HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+  "repo": "nestjs/nest",
+  "pr_number": 10000
+}
+
+### 3. Example with error handling (Invalid repo format)
+# This will return a 400 Bad Request due to invalid repository format
+POST {{baseUrl}}/pr-summary HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+  "repo": "TheAlgorithms/Python",
+  "pr_number": 123
+}
+
+### 4. Example with error handling (Non-existent PR)
+# This will return a 404 Not Found if the PR doesn't exist
+# or you don't have access to it
+POST {{baseUrl}}/pr-summary HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+  "repo": "owner/repo",
+  "pr_number": 999999
+}
+
+### 5. Example with missing fields
+# This will return a 400 Bad Request due to missing required fields
+POST {{baseUrl}}/pr-summary HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+  "repo": "owner/repo"
+  // pr_number is missing
+}
+
